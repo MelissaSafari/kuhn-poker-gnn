@@ -44,7 +44,6 @@ In our setting:
   - the **5-card** epistemic graph (20 worlds),
     using NetworkX and Matplotlib.
 
-
 ---
 
 ## 3. Requirements
@@ -71,5 +70,40 @@ After installing the dependencies and activating your virtual environment, you c
 
 ```bash
 python gnn_kuhn_scorer.py
+```
 
+## 5. Interpreting the Output
 
+When you run the script, three outputs are printed: the node feature matrix `X`, the normalised adjacency matrix `A_norm`, and a single scalar.
+
+### **Node Feature Matrix (`X`)**
+
+Each world `(a_card, b_card)` is encoded as a 6-dimensional vector:
+
+- 3 values for a’s card (one-hot)
+- 3 values for b’s card (one-hot)
+
+Example:
+
+[1, 0, 0, 0, 1, 0]
+
+means:
+
+- a = J
+- b = Q
+
+These vectors are the **initial node embeddings** used by the GNN.
+
+### **Normalised Adjacency Matrix (`A_norm`)**
+
+This matrix encodes indistinguishability relations:
+
+- same a card → Alice edge (`a`)
+- same b card → Bob edge (`b`)
+- plus self-loops
+
+Rows are normalised to sum to 1, ensuring that message passing averages information from indistinguishable worlds.
+
+### **Heuristic Score**
+
+At the end, the script prints a line such as:
