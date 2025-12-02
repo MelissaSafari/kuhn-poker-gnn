@@ -107,3 +107,9 @@ Rows are normalised to sum to 1, ensuring that message passing averages informat
 ### **Heuristic Score**
 
 At the end, the script prints a line such as:
+
+Heuristic score for this epistemic model: 0.1376...
+
+This is the **scalar evaluation of the entire epistemic model**.  
+A planner would compute one such score **per successor** to rank or prune branches.
+
